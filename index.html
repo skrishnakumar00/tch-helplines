@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5B4B7C">
+<title>Helplines</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="images/icon-192.png">
+<style>
+  /* ============ DESIGN TOKENS (from ankahee-design-tokens.css, unchanged) ============ */
+  :root {
+    --bg: #FAF6F2;
+    --surface: #FFFFFF;
+    --surface-soft: #F3EEE8;
+    --primary: #5B4B7C;
+    --primary-dark: #443A5E;
+    --primary-soft: #EDE8F3;
+    --success: #4F8A6D;
+    --success-soft: #E7F1EB;
+    --risk: #B8524A;
+    --risk-soft: #F7E9E7;
+    --text: #2E2A33;
+    --text-muted: #7A7480;
+    --border: #E4DDD6;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --shadow: 0 2px 10px rgba(46, 42, 51, 0.06);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.45;
+    padding-bottom: 96px;
+  }
+
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  /* ============ HEADER ============ */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow);
+    padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .topbar .logo { height: 40px; width: auto; max-width: 64px; object-fit: contain; border-radius: 8px; flex-shrink: 0; }
+  .topbar h1 { margin: 0; font-size: 18px; color: var(--primary-dark); line-height: 1.2; }
+  .topbar p { margin: 2px 0 0; font-size: 15px; color: var(--text-muted); }
+  .topbar p:empty { display: none; }
+
+  main { max-width: 640px; margin: 0 auto; padding: 16px 16px 24px; }
+
+  .now-line { font-size: 15px; color: var(--text-muted); margin: 0 4px 12px; min-height: 22px; }
+
+  /* ============ BUTTONS / CHIPS ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 20px; border-radius: 999px;
+    font-family: inherit; font-size: 16px; font-weight: 600; text-decoration: none;
+    border: 1.5px solid transparent; cursor: pointer; text-align: center;
+  }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:active { background: var(--primary-dark); }
+  .btn-secondary { background: var(--surface); color: var(--primary-dark); border-color: var(--border); }
+  .btn-secondary:active { background: var(--primary-soft); }
+  .btn-block { width: 100%; }
+  .btn-lg { min-height: 58px; font-size: 19px; }
+  .btn-row { display: flex; gap: 8px; margin-top: 8px; }
+  .btn-row .btn { flex: 1; }
+
+  .chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  /* Language chips: one swipeable row, so the hero Call button never moves down however many languages exist. */
+  .chip-scroll { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px 16px; padding: 2px 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .chip-scroll::-webkit-scrollbar { display: none; }
+  .chip-scroll .chip { flex-shrink: 0; white-space: nowrap; }
+  .chip {
+    padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--border);
+    background: var(--surface); font-family: inherit; font-size: 15px; color: var(--text);
+    cursor: pointer; min-height: 44px; display: flex; align-items: center;
+    -webkit-user-select: none; user-select: none; transition: all 0.15s ease;
+  }
+  .chip:active { transform: scale(0.97); }
+  .chip.selected { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 600; }
+
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 15px; line-height: 1.3; padding: 3px 12px; border-radius: 999px;
+    background: var(--surface-soft); color: var(--text);
+  }
+  .status { font-weight: 600; }
+  .status.open { background: var(--success-soft); }
+  .status.open::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+
+  /* ============ CARDS ============ */
+  .group-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--primary-dark); margin: 22px 4px 10px;
+  }
+  .hl-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px 18px 16px; margin-bottom: 12px;
+  }
+  .hl-card.hero { background: var(--primary-soft); padding: 20px 18px 18px; }
+  .hl-card .eyebrow {
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--primary-dark); margin: 0 0 8px;
+  }
+  .hl-name { margin: 0 0 8px; font-size: 18px; line-height: 1.25; color: var(--text); }
+  .hero .hl-name { font-size: 20px; }
+  .hl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+
+  .more { margin-top: 8px; }
+  .more summary {
+    min-height: 44px; display: flex; align-items: center; cursor: pointer;
+    font-size: 15px; font-weight: 600; color: var(--primary); list-style: none;
+  }
+  .more summary::-webkit-details-marker { display: none; }
+  .more summary::after { content: "▾"; margin-left: 6px; font-size: 13px; }
+  .more[open] summary::after { content: "▴"; }
+  .more dl { margin: 0 0 4px; font-size: 15px; }
+  .more dt { color: var(--text-muted); font-size: 15px; margin-top: 8px; }
+  .more dd { margin: 0; color: var(--text); overflow-wrap: anywhere; }
+  .more a { color: var(--primary); font-weight: 600; }
+
+  .closed-wrap { margin-top: 22px; }
+  .closed-wrap > summary {
+    min-height: 48px; display: flex; align-items: center; cursor: pointer; list-style: none;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--primary-dark); padding: 0 4px;
+  }
+  .closed-wrap > summary::-webkit-details-marker { display: none; }
+  .closed-wrap > summary::after { content: "▾"; margin-left: 8px; }
+  .closed-wrap[open] > summary::after { content: "▴"; }
+  .closed-wrap .hl-card { margin-top: 10px; }
+
+  .notice {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; font-size: 16px;
+  }
+  .loading-note { text-align: center; padding: 40px 16px; color: var(--text-muted); font-size: 15px; }
+
+  .footer-note { font-size: 15px; color: var(--text-muted); margin: 22px 4px 4px; }
+  .text-link {
+    background: none; border: none; color: var(--primary); font-family: inherit; font-size: 15px; font-weight: 600;
+    text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; padding: 8px 4px;
+  }
+
+  /* ============ SAVE BAR ============ */
+  .save-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+  .save-bar-inner { max-width: 640px; margin: 0 auto; }
+
+  /* ============ SHEET ============ */
+  .overlay { position: fixed; inset: 0; background: rgba(46,42,51,0.4); display: flex; align-items: flex-end; justify-content: center; z-index: 50; }
+  .overlay.hidden { display: none; }
+  .sheet { background: var(--surface); border-radius: 14px 14px 0 0; padding: 22px 20px calc(20px + env(safe-area-inset-bottom)); width: 100%; max-width: 480px; max-height: 85vh; overflow-y: auto; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }
+  @media (min-width: 520px) { .overlay { align-items: center; } .sheet { border-radius: var(--radius); } }
+  .sheet h3 { margin: 0 0 10px; font-size: 18px; }
+  .sheet p { margin: 0 0 12px; font-size: 16px; line-height: 1.5; }
+  .sheet .btn { margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <img class="logo" id="logo" alt="" hidden>
+  <div>
+    <h1 id="pageTitle">Helplines</h1>
+    <p id="pageSubtitle"></p>
+  </div>
+</header>
+
+<main>
+  <p class="now-line" id="nowLine"></p>
+  <div id="filterWrap"></div>
+  <div id="content"><div class="loading-note">Loading…</div></div>
+  <p class="footer-note" id="verifiedNote"></p>
+  <button class="text-link" id="homeScreenBtn" type="button" hidden>Add this page to your home screen</button>
+</main>
+
+<div class="save-bar" id="saveBar" hidden>
+  <div class="save-bar-inner">
+    <a class="btn btn-primary btn-block" id="saveContactsBtn" href="helplines.vcf" download="helplines.vcf">Save all to contacts</a>
+  </div>
+</div>
+
+<div class="overlay hidden" id="overlay"><div class="sheet" id="sheetContent"></div></div>
+
+<script>
+/* ====================================================================
+   SHARED HELPERS (not a feature; used by several blocks below)
+   ==================================================================== */
+const DATA_URL = 'helplines.json';
+const DAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const WEEK_MIN = 7 * 1440;
+
+let DATA = null;          // parsed helplines.json
+let filterLang = null;    // F10: selected language chip, or null
+let lastHtml = '';        // last rendered list markup, to skip no-op redraws
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// 12-hour clock from minutes after midnight: 1200 -> "8 pm", 630 -> "10:30 am", 1440 -> "12 am"
+// withMinutes = true always shows minutes ("12:00 pm"), used for the live clock line.
+function fmtTime(min, withMinutes) {
+  const m = min % 1440;
+  const h24 = Math.floor(m / 60), mm = m % 60;
+  const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+  return h12 + (mm || withMinutes ? ':' + String(mm).padStart(2, '0') : '') + ' ' + (h24 < 12 ? 'am' : 'pm');
+}
+
+// "1800 000 0001", "90000 00003"; anything else is shown as stored.
+function fmtPhone(p) {
+  if (p.charAt(0) === '+') return p;
+  if (/^1800\d{6,7}$/.test(p)) return p.slice(0, 4) + ' ' + p.slice(4, 7) + ' ' + p.slice(7);
+  if (/^\d{10}$/.test(p)) return p.slice(0, 5) + ' ' + p.slice(5);
+  return p;
+}
+
+function fmtDateStr(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+  return m ? (parseInt(m[3], 10) + ' ' + MONTH_SHORT[parseInt(m[2], 10) - 1] + ' ' + m[1]) : '';
+}
+
+/* ====================================================================
+   FEATURE F6 — Open-now engine
+   Status: New.
+   Validation: none needed here; rows with bad data are blocked at export (F2).
+   Calculation:
+     C1 Open now — now (IST day + time) is inside the window on any listed day; a window
+        that runs past midnight stays open until Open To the next morning (incl. Sat -> Sun).
+        CONFIRMED
+     C2 Opens next — start of the next window: "Opens 4 pm" / "Opens tomorrow 10 am" /
+        "Opens Mon 10 am". CONFIRMED
+     C4 Sort (open) — 24x7 first, then timed, each alphabetical. CONFIRMED
+     C6 Public holidays ignored. CONFIRMED
+     C7 Closing text chains windows that touch (Mon and Tue both 00:00–24:00).
+        UNVERIFIED — NEEDS CONFIRMATION
+     C8 Sort (closed) — soonest to open first, then alphabetical.
+        UNVERIFIED — NEEDS CONFIRMATION
+   Dependencies: helplines.json fields days[], from, to (F2). Time always taken in IST,
+     from the visitor's clock, so a device in another time zone still gets the right answer.
+   ==================================================================== */
+const IST_FMT = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Asia/Kolkata', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+});
+
+// now = { dow: 0-6 (Sun=0), min: minutes after midnight, w: minutes since Sunday 00:00 }
+function istNow(date) {
+  const parts = IST_FMT.formatToParts(date || new Date());
+  const get = t => parts.find(p => p.type === t).value;
+  const dow = DAY_SHORT.indexOf(get('weekday'));
+  const min = (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10);
+  return { dow: dow, min: min, w: dow * 1440 + min };
+}
+
+function windowLen(h) { return h.to > h.from ? h.to - h.from : h.to + 1440 - h.from; }
+function is247(h) { return h.days.length === 7 && h.from === 0 && h.to === 1440; }
+
+// minutes since this helpline's most recent window start, if inside a window; otherwise -1
+function minutesIntoWindow(h, w) {
+  const len = windowLen(h);
+  for (const d of h.days) {
+    const delta = (w - (d * 1440 + h.from) + WEEK_MIN) % WEEK_MIN;
+    if (delta < len) return delta;
+  }
+  return -1;
+}
+
+// Absolute closing moment (in the same "minutes since Sunday" frame as w), chaining windows that touch.
+function closingW(h, w) {
+  const len = windowLen(h);
+  let end = w + (len - minutesIntoWindow(h, w));
+  for (let i = 0; i < 8; i++) {
+    const next = h.days.find(d => (((end - (d * 1440 + h.from)) % WEEK_MIN) + WEEK_MIN) % WEEK_MIN === 0);
+    if (next === undefined) break;
+    end += len;
+  }
+  return end;
+}
+
+function untilLabel(h, now) {
+  const end = closingW(h, now.w);
+  const span = end - now.w;
+  const endMin = ((end % 1440) + 1440) % 1440;
+  const total = now.min + span;
+  if (endMin === 0) {
+    // closes at midnight: "till 12 am" if that is tonight, otherwise name the last open day
+    const off = total / 1440 - 1;
+    return off >= 1 ? 'till end of ' + DAY_SHORT[(now.dow + off) % 7] : 'till 12 am';
+  }
+  const off = Math.floor(total / 1440);
+  return off >= 2 ? 'till ' + DAY_SHORT[(now.dow + off) % 7] + ' ' + fmtTime(endMin) : 'till ' + fmtTime(endMin);
+}
+
+function minutesToNextOpen(h, w) {
+  let best = Infinity;
+  for (const d of h.days) {
+    const delta = ((d * 1440 + h.from - w) % WEEK_MIN + WEEK_MIN) % WEEK_MIN;
+    if (delta > 0 && delta < best) best = delta;
+  }
+  return best;
+}
+
+function opensLabel(h, now, delta) {
+  const off = Math.floor((now.min + delta) / 1440);
+  const t = fmtTime(h.from);
+  if (off === 0) return 'Opens ' + t;
+  if (off === 1) return 'Opens tomorrow ' + t;
+  return 'Opens ' + DAY_SHORT[(now.dow + off) % 7] + ' ' + t;
+}
+
+function statusOf(h, now) {
+  if (minutesIntoWindow(h, now.w) >= 0) {
+    return is247(h)
+      ? { open: true, is247: true, text: 'Open · 24 hours' }
+      : { open: true, is247: false, text: 'Open · ' + untilLabel(h, now) };
+  }
+  const delta = minutesToNextOpen(h, now.w);
+  return { open: false, is247: false, delta: delta, text: opensLabel(h, now, delta) };
+}
+
+function byName(a, b) { return a.h.name.localeCompare(b.h.name, undefined, { sensitivity: 'base' }); }
+
+// list = [{ h, st }] -> { open: sorted, closed: sorted }
+function splitAndSort(list) {
+  const open = list.filter(x => x.st.open).sort((a, b) => (b.st.is247 - a.st.is247) || byName(a, b));
+  const closed = list.filter(x => !x.st.open).sort((a, b) => (a.st.delta - b.st.delta) || byName(a, b));
+  return { open: open, closed: closed };
+}
+/* ===== end FEATURE F6 ===== */
+
+/* ====================================================================
+   FEATURE F7 — Hero card selection
+   Status: New.
+   Validation: none. If there is no candidate, no hero card is shown.
+   Calculation:
+     C3 Among open helplines, the lowest Hero Rank wins (ties alphabetical). If none is
+        ranked and open, the first open 24x7 line. If neither, no hero. CONFIRMED
+   Dependencies: F6 (openList already sorted 24x7-first); helplines.json heroRank.
+   ==================================================================== */
+function pickHero(openList) {
+  const ranked = openList.filter(x => x.h.heroRank !== null && x.h.heroRank !== undefined)
+    .sort((a, b) => (a.h.heroRank - b.h.heroRank) || byName(a, b));
+  if (ranked.length) return ranked[0];
+  return openList.find(x => x.st.is247) || null;
+}
+/* ===== end FEATURE F7 ===== */
+
+/* ====================================================================
+   FEATURE F8 — Helpline card
+   Status: New.
+   Validation: each button is drawn only when its field exists. All data is HTML-escaped.
+   Calculation: none (phone display grouping is cosmetic).
+   Dependencies: helplines.json contact fields (F2).
+   ==================================================================== */
+function cardHtml(x, isHero) {
+  const h = x.h, st = x.st;
+  const tags = ['<span class="tag status ' + (st.open ? 'open' : 'closed') + '">' + esc(st.text) + '</span>'];
+  if (h.tollFree) tags.push('<span class="tag">Free call</span>');
+  if (h.location) tags.push('<span class="tag">' + esc(h.location) + '</span>');
+  (h.languages || []).forEach(l => tags.push('<span class="tag">' + esc(l) + '</span>'));
+
+  const callCls = st.open ? 'btn btn-primary btn-block' : 'btn btn-secondary btn-block';
+  let html = '<article class="hl-card' + (isHero ? ' hero' : '') + '">';
+  if (isHero) html += '<p class="eyebrow">Talk to someone now</p>';
+  html += '<h3 class="hl-name">' + esc(h.name) + '</h3>';
+  html += '<div class="hl-tags">' + tags.join('') + '</div>';
+  html += '<a class="' + callCls + (isHero ? ' btn-lg' : '') + '" href="tel:' + esc(h.phone) + '">Call ' + esc(fmtPhone(h.phone)) + '</a>';
+
+  const row = [];
+  if (h.email) row.push('<a class="btn btn-secondary" href="mailto:' + esc(h.email) + '">Email</a>');
+  if (h.whatsapp) row.push('<a class="btn btn-secondary" href="https://wa.me/' + esc(h.whatsapp) + '" target="_blank" rel="noopener">WhatsApp</a>');
+  if (row.length) html += '<div class="btn-row">' + row.join('') + '</div>';
+
+  let more = '<dt>Hours</dt><dd>' + esc(h.hours) + '</dd>';
+  if (h.address) more += '<dt>Address</dt><dd>' + esc(h.address) + '</dd>';
+  if (h.altPhone) more += '<dt>Other number</dt><dd><a href="tel:' + esc(h.altPhone) + '">' + esc(fmtPhone(h.altPhone)) + '</a></dd>';
+  if (h.website) more += '<dt>Website</dt><dd><a href="' + esc(h.website) + '" target="_blank" rel="noopener">' + esc(h.website.replace(/^https?:\/\//, '')) + '</a></dd>';
+  if (h.lastVerified) more += '<dt>Details checked</dt><dd>' + esc(fmtDateStr(h.lastVerified)) + '</dd>';
+  html += '<details class="more"><summary>More details</summary><dl>' + more + '</dl></details>';
+  return html + '</article>';
+}
+/* ===== end FEATURE F8 ===== */
+
+/* ====================================================================
+   FEATURE F9 — "Not open right now" list
+   Status: New.
+   Validation: none. Call stays available on closed lines, because published timings
+     can be out of date.
+   Calculation: C2 and C8 (see F6).
+   Dependencies: F6, F8.
+   ==================================================================== */
+function closedHtml(closed, expanded) {
+  if (!closed.length) return '';
+  return '<details class="closed-wrap"' + (expanded ? ' open' : '') + '><summary>Not open right now (' + closed.length + ')</summary>' +
+    closed.map(x => cardHtml(x, false)).join('') + '</details>';
+}
+/* ===== end FEATURE F9 ===== */
+
+/* ====================================================================
+   FEATURE F10 — Language filter chips
+   Status: New.
+   Validation: chips shown only when the data has 2 or more languages.
+   Calculation:
+     C9 A selected language limits the hero and both lists to helplines with that language.
+        UNVERIFIED — NEEDS CONFIRMATION
+   Dependencies: helplines.json languages[] (F2).
+   ==================================================================== */
+function visibleHelplines() {
+  return DATA.helplines.filter(h => !filterLang || (h.languages || []).includes(filterLang));
+}
+
+function renderFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const langs = (DATA && DATA.languages) || [];
+  if (langs.length < 2) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = '<div class="chip-group chip-scroll" role="group" aria-label="Language">' +
+    '<button type="button" class="chip' + (filterLang ? '' : ' selected') + '" data-lang="">All languages</button>' +
+    langs.map(l => '<button type="button" class="chip' + (filterLang === l ? ' selected' : '') + '" data-lang="' + esc(l) + '">' + esc(l) + '</button>').join('') +
+    '</div>';
+}
+
+document.getElementById('filterWrap').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  filterLang = chip.dataset.lang || null;
+  renderFilters();
+  render();
+});
+/* ===== end FEATURE F10 ===== */
+
+/* ====================================================================
+   Page render (ties F6–F10 together, and refreshes on a timer)
+   ==================================================================== */
+function render(date) {
+  if (!DATA) return;
+  const now = istNow(date);
+  const list = visibleHelplines().map(h => ({ h: h, st: statusOf(h, now) }));
+  const { open, closed } = splitAndSort(list);
+  const hero = pickHero(open);
+  const rest = open.filter(x => x !== hero);
+
+  const clock = DAY_SHORT[now.dow] + ', ' + fmtTime(now.min, true);
+  document.getElementById('nowLine').textContent = open.length ? 'Open right now · ' + clock : clock;
+
+  let html = '';
+  if (hero) html += cardHtml(hero, true);
+  if (rest.length) html += '<div class="group-title">' + (hero ? 'Also open now' : 'Open now') + '</div>' + rest.map(x => cardHtml(x, false)).join('');
+  if (!open.length) {
+    html += '<div class="notice">' + (filterLang
+      ? 'No ' + esc(filterLang) + '-language helpline is open at this moment. Here is when each one opens next.'
+      : 'No helpline is open at this moment. Here is when each one opens next.') + '</div>';
+  }
+  if (!list.length) html = '<div class="notice">No helplines to show yet.</div>';
+  html += closedHtml(closed, open.length === 0);
+
+  // Only touch the DOM when something actually changed, so an opened "More details" is not collapsed by the timer.
+  if (html !== lastHtml) {
+    document.getElementById('content').innerHTML = html;
+    lastHtml = html;
+  }
+}
+
+/* ====================================================================
+   FEATURE F5 — Header from Config
+   Status: New.
+   Validation: logo is hidden if the image fails to load; title falls back to "Helplines".
+   Calculation: none.
+   Dependencies: helplines.json settings {title, subtitle, logo} (F2); images/logo.png in the repo.
+   ==================================================================== */
+function applySettings() {
+  const s = (DATA && DATA.settings) || {};
+  if (s.title) { document.getElementById('pageTitle').textContent = s.title; document.title = s.title; }
+  document.getElementById('pageSubtitle').textContent = s.subtitle || '';
+  const logo = document.getElementById('logo');
+  if (s.logo) {
+    logo.onerror = () => { logo.hidden = true; };
+    logo.onload = () => { logo.hidden = false; };
+    logo.src = s.logo;
+  }
+}
+/* ===== end FEATURE F5 ===== */
+
+/* ====================================================================
+   FEATURE F13 — Last-checked note
+   Status: New.
+   Validation: shown only when the data has a verifiedOn date.
+   Calculation: C10 oldest Last Verified among published rows (computed at export).
+     UNVERIFIED — NEEDS CONFIRMATION
+   Dependencies: helplines.json verifiedOn (F2).
+   ==================================================================== */
+function renderVerifiedNote() {
+  const d = fmtDateStr(DATA && DATA.verifiedOn);
+  document.getElementById('verifiedNote').textContent = d ? 'Last checked ' + d + ' · Timings may differ on public holidays.' : '';
+}
+/* ===== end FEATURE F13 ===== */
+
+/* ====================================================================
+   Sheet (bottom panel) helpers — used by F11 and F12
+   ==================================================================== */
+function showSheet(html) {
+  document.getElementById('sheetContent').innerHTML = html;
+  document.getElementById('overlay').classList.remove('hidden');
+  const btn = document.getElementById('sheetClose');
+  if (btn) { btn.addEventListener('click', closeSheet); btn.focus(); }
+}
+function closeSheet() { document.getElementById('overlay').classList.add('hidden'); }
+document.getElementById('overlay').addEventListener('click', e => { if (e.target.id === 'overlay') closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+/* ====================================================================
+   FEATURE F11 — Save all to contacts
+   Status: New.
+   Validation: none. The page cannot tell whether the phone actually saved the contacts,
+     so the message says what the phone will ask, instead of claiming success.
+   Calculation: none (the file itself is built at export, C5 CONFIRMED).
+   Dependencies: helplines.vcf published next to the page (F4).
+   ==================================================================== */
+document.getElementById('saveContactsBtn').addEventListener('click', () => {
+  const n = DATA ? DATA.helplines.length : 0;
+  setTimeout(() => showSheet(
+    '<h3>Your phone will ask to add them</h3>' +
+    '<p>Tap “Add All” (or “Save”) when it appears. ' + (n ? n + ' numbers are' : 'The numbers are') +
+    ' saved as “Helpline – …”, so they are easy to find later, even without internet.</p>' +
+    '<button class="btn btn-primary btn-block" id="sheetClose" type="button">Okay</button>'), 500);
+});
+/* ===== end FEATURE F11 ===== */
+
+/* ====================================================================
+   FEATURE F12 — Offline copy + add to home screen
+   Status: New.
+   Validation: service worker registered only over https or localhost.
+   Calculation: none.
+   Dependencies: sw.js, manifest.webmanifest, images/icon-192.png and icon-512.png in the repo.
+   ==================================================================== */
+let installPrompt = null;
+
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
+
+(function initHomeScreenButton() {
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  const btn = document.getElementById('homeScreenBtn');
+  if (standalone) return;
+  btn.hidden = false;
+  btn.addEventListener('click', () => {
+    if (installPrompt) { installPrompt.prompt(); installPrompt = null; return; }
+    showSheet(
+      '<h3>Keep this page on your phone</h3>' +
+      '<p><strong>iPhone (Safari):</strong> tap the Share button, then “Add to Home Screen”.</p>' +
+      '<p><strong>Android (Chrome):</strong> tap the ⋮ menu, then “Add to Home screen” or “Install app”.</p>' +
+      '<p>Once added, it opens like an app, and the last list still opens without internet.</p>' +
+      '<button class="btn btn-primary btn-block" id="sheetClose" type="button">Okay</button>');
+  });
+})();
+/* ===== end FEATURE F12 ===== */
+
+/* ====================================================================
+   LOAD + TIMERS
+   ==================================================================== */
+async function loadData() {
+  try {
+    const res = await fetch(DATA_URL, { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (!json || !Array.isArray(json.helplines)) throw new Error('Unexpected data');
+    DATA = json;
+  } catch (err) {
+    document.getElementById('content').innerHTML =
+      '<div class="notice">Couldn’t load the list right now. Please check your connection and try again. ' +
+      'If you saved these numbers to your contacts earlier, they are still there.</div>';
+    return;
+  }
+  applySettings();
+  renderFilters();
+  render();
+  renderVerifiedNote();
+  document.getElementById('saveBar').hidden = false;
+}
+
+setInterval(() => render(), 30000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') render(); });
+
+loadData();
+</script>
+</body>
+</html>

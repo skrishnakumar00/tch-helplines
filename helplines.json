@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-30 13:45",
+  "verifiedOn": "2026-09-10",
+  "settings": {
+    "title": "Sample Helplines",
+    "subtitle": "Someone to talk to, right now",
+    "logo": "images/logo.png"
+  },
+  "languages": [
+    "English",
+    "Hindi",
+    "Tamil"
+  ],
+  "helplines": [
+    {
+      "name": "Sample City Line",
+      "phone": "9000000003",
+      "altPhone": "02200000004",
+      "whatsapp": "919000000003",
+      "email": "care@sample-c.example",
+      "website": "https://sample-c.example",
+      "location": "Mumbai",
+      "address": "Sample Road, Sample Nagar, Mumbai; near the station",
+      "languages": [
+        "English",
+        "Hindi"
+      ],
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 600,
+      "to": 1200,
+      "hours": "Mon–Sat, 10 am – 8 pm",
+      "tollFree": false,
+      "heroRank": null,
+      "lastVerified": "2026-09-10"
+    },
+    {
+      "name": "Sample National Helpline",
+      "phone": "1800000001",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "help@sample-a.example",
+      "website": "",
+      "location": "Pan-India",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English",
+        "Tamil"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 0,
+      "to": 1440,
+      "hours": "Every day, 24 hours",
+      "tollFree": true,
+      "heroRank": 1,
+      "lastVerified": "2026-09-15"
+    },
+    {
+      "name": "Sample Night Line",
+      "phone": "1800000002",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "",
+      "website": "",
+      "location": "Pan-India",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 1200,
+      "to": 360,
+      "hours": "Every day, 8 pm – 6 am",
+      "tollFree": true,
+      "heroRank": 2,
+      "lastVerified": "2026-09-15"
+    }
+  ]
+}

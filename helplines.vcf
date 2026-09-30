@@ -1,0 +1,30 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Sample City Line
+N:Helpline – Sample City Line;;;;
+TEL;TYPE=WORK,VOICE:9000000003
+TEL;TYPE=WORK,VOICE:02200000004
+EMAIL;TYPE=INTERNET:care@sample-c.example
+URL:https://sample-c.example
+ADR;TYPE=WORK:;;Sample Road\, Sample Nagar\, Mumbai\; near the station;;;
+ ;
+NOTE:Hours: Mon–Sat\, 10 am – 8 pm\nLanguages: English\, Hindi\nLocation:
+  Mumbai\nDetails checked 2026-09-10
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Sample National Helpline
+N:Helpline – Sample National Helpline;;;;
+TEL;TYPE=WORK,VOICE:1800000001
+EMAIL;TYPE=INTERNET:help@sample-a.example
+NOTE:Hours: Every day\, 24 hours\nLanguages: Hindi\, English\, Tamil\nLoc
+ ation: Pan-India\nDetails checked 2026-09-15
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Sample Night Line
+N:Helpline – Sample Night Line;;;;
+TEL;TYPE=WORK,VOICE:1800000002
+NOTE:Hours: Every day\, 8 pm – 6 am\nLanguages: Hindi\, English\nLocation
+ : Pan-India\nDetails checked 2026-09-15
+END:VCARD
