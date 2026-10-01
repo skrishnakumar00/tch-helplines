@@ -1,11 +1,11 @@
 /* FEATURE F12 (part) — Offline copy.
-   Status: New. Network first, so people always get the latest list when online; if the
+   Status: Modified (v2): manifest removed from the saved files, cache renamed. Network first, so people always get the latest list when online; if the
    network is slow (4 s) or absent, the last saved copy is used. Same-origin GET only.
    Validation: only 200 responses are cached. Calculation: none.
    Dependencies: page registers this as sw.js; files below sit next to it in the repo.
    Bump CACHE when the page code changes shape, so old copies are cleared. */
-const CACHE = 'helplines-v1';
-const PRECACHE = ['./', 'index.html', 'helplines.json', 'helplines.vcf', 'manifest.webmanifest'];
+const CACHE = 'helplines-v2'; // v2: new name so phones that visited v1 drop the old saved copy (incl. the manifest)
+const PRECACHE = ['./', 'index.html', 'helplines.json', 'helplines.vcf'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
