@@ -1,30 +1,137 @@
 BEGIN:VCARD
 VERSION:3.0
-FN:Helpline – Sample City Line
-N:Helpline – Sample City Line;;;;
-TEL;TYPE=WORK,VOICE:9000000003
-TEL;TYPE=WORK,VOICE:02200000004
-EMAIL;TYPE=INTERNET:care@sample-c.example
-URL:https://sample-c.example
-ADR;TYPE=WORK:;;Sample Road\, Sample Nagar\, Mumbai\; near the station;;;
- ;
-NOTE:Hours: Mon–Sat\, 10 am – 8 pm\nLanguages: English\, Hindi\nLocation:
-  Mumbai\nDetails checked 2026-09-10
+FN:Helpline – Ankahee Helpline
+N:Helpline – Ankahee Helpline;;;;
+TEL;TYPE=WORK,VOICE:8655486966
+EMAIL;TYPE=INTERNET:hello@ankaheehelpline.org
+URL:https://ankaheehelpline.org/
+NOTE:Hours: Every day\, 4 pm – 12 am\nLanguages: Hindi\, English\, Marath
+ i\nLocation: Mumbai\nDetails checked 2026-10-01
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
-FN:Helpline – Sample National Helpline
-N:Helpline – Sample National Helpline;;;;
-TEL;TYPE=WORK,VOICE:1800000001
-EMAIL;TYPE=INTERNET:help@sample-a.example
-NOTE:Hours: Every day\, 24 hours\nLanguages: Hindi\, English\, Tamil\nLoc
- ation: Pan-India\nDetails checked 2026-09-15
+FN:Helpline – Connecting Trust
+N:Helpline – Connecting Trust;;;;
+TEL;TYPE=WORK,VOICE:9922001122
+TEL;TYPE=WORK,VOICE:9922004305
+EMAIL;TYPE=INTERNET:distressmailsconnecting@gmail.com
+URL:http://www.connectingngo.org/
+NOTE:Hours: Every day\, 10 am – 8 pm\nLanguages: Hindi\, English\, Marath
+ i\nLocation: Pune\nDetails checked 2026-10-01
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
-FN:Helpline – Sample Night Line
-N:Helpline – Sample Night Line;;;;
-TEL;TYPE=WORK,VOICE:1800000002
-NOTE:Hours: Every day\, 8 pm – 6 am\nLanguages: Hindi\, English\nLocation
- : Pan-India\nDetails checked 2026-09-15
+FN:Helpline – COOJ Mental Health Foundation
+N:Helpline – COOJ Mental Health Foundation;;;;
+TEL;TYPE=WORK,VOICE:6361612525
+EMAIL;TYPE=INTERNET:youmatterbycooj@gmail.com
+URL:http://www.cooj.co.in/
+NOTE:Hours: Mon–Fri\, 1 pm – 7 pm\nLanguages: Hindi\, English\, Marathi\n
+ Location: Goa\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Jeevan Suicide Prevention Centre
+N:Helpline – Jeevan Suicide Prevention Centre;;;;
+TEL;TYPE=WORK,VOICE:9297777499
+TEL;TYPE=WORK,VOICE:9297777500
+EMAIL;TYPE=INTERNET:jeevanjamshedpur@gmail.com
+URL:https://jeevanhelplinesuicideprevention.blogspot.com/
+NOTE:Hours: Every day\, 10 am – 6 pm\nLanguages: Hindi\, English\, Bengal
+ i\nLocation: Jamshedpur\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Lifeline Foundation
+N:Helpline – Lifeline Foundation;;;;
+TEL;TYPE=WORK,VOICE:9088030303
+EMAIL;TYPE=INTERNET:lifelinekolkata@gmail.com
+URL:http://www.lifelinefoundation.in/
+NOTE:Hours: Every day\, 10 am – 10 pm\nLanguages: Hindi\, English\, Benga
+ li\nLocation: Kolkata\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Maithri
+N:Helpline – Maithri;;;;
+TEL;TYPE=WORK,VOICE:4842540530
+EMAIL;TYPE=INTERNET:maithrihelp@gmail.com
+URL:http://www.maithrikochi.in/
+NOTE:Hours: Every day\, 10 am – 7 pm\nLanguages: Hindi\, English\nLocatio
+ n: Kochi\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Nesam
+N:Helpline – Nesam;;;;
+TEL;TYPE=WORK,VOICE:4242220022
+URL:http://www.nesam.in/
+NOTE:Hours: Every day\, 12 pm – 8 pm\nLanguages: Hindi\, English\nLocatio
+ n: Erode\, Tamil Nadu\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Roshini
+N:Helpline – Roshini;;;;
+TEL;TYPE=WORK,VOICE:8142020033
+TEL;TYPE=WORK,VOICE:8142020044
+EMAIL;TYPE=INTERNET:roshnihelp@gmail.com
+URL:http://www.roshinitrust.com/
+NOTE:Hours: Every day\, 11 am – 9 pm\nLanguages: Hindi\, English\nLocatio
+ n: Hyderabad\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Saath Suicide Prevention Centre
+N:Helpline – Saath Suicide Prevention Centre;;;;
+TEL;TYPE=WORK,VOICE:7926305544
+EMAIL;TYPE=INTERNET:saath12@yahoo.com
+URL:http://www.saathindia.org/
+NOTE:Hours: Every day\, 1 pm – 7 pm\nLanguages: Hindi\, English\nLocation
+ : Ahmedabad\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Sanjeevani
+N:Helpline – Sanjeevani;;;;
+TEL;TYPE=WORK,VOICE:9400033900
+TEL;TYPE=WORK,VOICE:4712533900
+EMAIL;TYPE=INTERNET:sanjeevanitrivandrum@gmail.com
+URL:http://www.sanjeevanitrivandrum.com/
+NOTE:Hours: Every day\, 24 hours\nLanguages: Hindi\, English\nLocation: T
+ rivandrum\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Sneha Foundation
+N:Helpline – Sneha Foundation;;;;
+TEL;TYPE=WORK,VOICE:4424640050
+TEL;TYPE=WORK,VOICE:4424640060
+EMAIL;TYPE=INTERNET:help@snehaindia.org
+URL:https://snehaindia.org/new/
+NOTE:Hours: Every day\, 10 am – 10 pm\nLanguages: Hindi\, English\nLocati
+ on: Chennai\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Sumaitri
+N:Helpline – Sumaitri;;;;
+TEL;TYPE=WORK,VOICE:1146018404
+TEL;TYPE=WORK,VOICE:9315767849
+EMAIL;TYPE=INTERNET:feelingsuicidal@sumaitri.net
+URL:https://sumaitri.net/
+NOTE:Hours: Every day\, 12:30 pm – 5 pm\nLanguages: Hindi\, English\nLoca
+ tion: New Delhi\nDetails checked 2026-10-01
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Helpline – Thanal Crisis Intervention and Suicide Prevention Research 
+ Centre
+N:Helpline – Thanal Crisis Intervention and Suicide Prevention Research C
+ entre;;;;
+TEL;TYPE=WORK,VOICE:4952760000
+EMAIL;TYPE=INTERNET:thanal.calicut@gmail.com
+URL:https://www.drpnsureshkumar.com/thanal.html
+NOTE:Hours: Every day\, 10 am – 6 pm\nLanguages: Hindi\, English\nLocatio
+ n: Calicut\nDetails checked 2026-10-01
 END:VCARD
