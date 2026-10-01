@@ -1,59 +1,32 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-30 13:45",
-  "verifiedOn": "2026-09-10",
+  "generatedAt": "2026-10-01 12:20",
+  "verifiedOn": "2026-10-01",
   "settings": {
-    "title": "Sample Helplines",
+    "title": "Helplines Directory",
     "subtitle": "Someone to talk to, right now",
-    "logo": "images/logo.png"
+    "logo": "images/logo.jpg"
   },
   "languages": [
+    "Bengali",
     "English",
     "Hindi",
-    "Tamil"
+    "Marathi"
   ],
   "helplines": [
     {
-      "name": "Sample City Line",
-      "phone": "9000000003",
-      "altPhone": "02200000004",
-      "whatsapp": "919000000003",
-      "email": "care@sample-c.example",
-      "website": "https://sample-c.example",
-      "location": "Mumbai",
-      "address": "Sample Road, Sample Nagar, Mumbai; near the station",
-      "languages": [
-        "English",
-        "Hindi"
-      ],
-      "days": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
-      "from": 600,
-      "to": 1200,
-      "hours": "Mon–Sat, 10 am – 8 pm",
-      "tollFree": false,
-      "heroRank": null,
-      "lastVerified": "2026-09-10"
-    },
-    {
-      "name": "Sample National Helpline",
-      "phone": "1800000001",
+      "name": "Ankahee Helpline",
+      "phone": "8655486966",
       "altPhone": "",
       "whatsapp": "",
-      "email": "help@sample-a.example",
-      "website": "",
-      "location": "Pan-India",
+      "email": "hello@ankaheehelpline.org",
+      "website": "https://ankaheehelpline.org/",
+      "location": "Mumbai",
       "address": "",
       "languages": [
         "Hindi",
         "English",
-        "Tamil"
+        "Marathi"
       ],
       "days": [
         0,
@@ -64,21 +37,139 @@
         5,
         6
       ],
-      "from": 0,
+      "from": 960,
       "to": 1440,
-      "hours": "Every day, 24 hours",
-      "tollFree": true,
+      "hours": "Every day, 4 pm – 12 am",
+      "tollFree": false,
       "heroRank": 1,
-      "lastVerified": "2026-09-15"
+      "lastVerified": "2026-10-01"
     },
     {
-      "name": "Sample Night Line",
-      "phone": "1800000002",
+      "name": "Connecting Trust",
+      "phone": "9922001122",
+      "altPhone": "9922004305",
+      "whatsapp": "",
+      "email": "distressmailsconnecting@gmail.com",
+      "website": "http://www.connectingngo.org/",
+      "location": "Pune",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English",
+        "Marathi"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 600,
+      "to": 1200,
+      "hours": "Every day, 10 am – 8 pm",
+      "tollFree": false,
+      "heroRank": 3,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "COOJ Mental Health Foundation",
+      "phone": "6361612525",
       "altPhone": "",
       "whatsapp": "",
-      "email": "",
-      "website": "",
-      "location": "Pan-India",
+      "email": "youmatterbycooj@gmail.com",
+      "website": "http://www.cooj.co.in/",
+      "location": "Goa",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English",
+        "Marathi"
+      ],
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "from": 780,
+      "to": 1140,
+      "hours": "Mon–Fri, 1 pm – 7 pm",
+      "tollFree": false,
+      "heroRank": 6,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Jeevan Suicide Prevention Centre",
+      "phone": "9297777499",
+      "altPhone": "9297777500",
+      "whatsapp": "",
+      "email": "jeevanjamshedpur@gmail.com",
+      "website": "https://jeevanhelplinesuicideprevention.blogspot.com/",
+      "location": "Jamshedpur",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English",
+        "Bengali"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 600,
+      "to": 1080,
+      "hours": "Every day, 10 am – 6 pm",
+      "tollFree": false,
+      "heroRank": 4,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Lifeline Foundation",
+      "phone": "9088030303",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "lifelinekolkata@gmail.com",
+      "website": "http://www.lifelinefoundation.in/",
+      "location": "Kolkata",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English",
+        "Bengali"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 600,
+      "to": 1320,
+      "hours": "Every day, 10 am – 10 pm",
+      "tollFree": false,
+      "heroRank": 7,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Maithri",
+      "phone": "4842540530",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "maithrihelp@gmail.com",
+      "website": "http://www.maithrikochi.in/",
+      "location": "Kochi",
       "address": "",
       "languages": [
         "Hindi",
@@ -93,12 +184,215 @@
         5,
         6
       ],
-      "from": 1200,
-      "to": 360,
-      "hours": "Every day, 8 pm – 6 am",
-      "tollFree": true,
+      "from": 600,
+      "to": 1140,
+      "hours": "Every day, 10 am – 7 pm",
+      "tollFree": false,
+      "heroRank": 5,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Nesam",
+      "phone": "4242220022",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "",
+      "website": "http://www.nesam.in/",
+      "location": "Erode, Tamil Nadu",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 720,
+      "to": 1200,
+      "hours": "Every day, 12 pm – 8 pm",
+      "tollFree": false,
+      "heroRank": 9,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Roshini",
+      "phone": "8142020033",
+      "altPhone": "8142020044",
+      "whatsapp": "",
+      "email": "roshnihelp@gmail.com",
+      "website": "http://www.roshinitrust.com/",
+      "location": "Hyderabad",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 660,
+      "to": 1260,
+      "hours": "Every day, 11 am – 9 pm",
+      "tollFree": false,
+      "heroRank": 8,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Saath Suicide Prevention Centre",
+      "phone": "7926305544",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "saath12@yahoo.com",
+      "website": "http://www.saathindia.org/",
+      "location": "Ahmedabad",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 780,
+      "to": 1140,
+      "hours": "Every day, 1 pm – 7 pm",
+      "tollFree": false,
+      "heroRank": 11,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Sanjeevani",
+      "phone": "9400033900",
+      "altPhone": "4712533900",
+      "whatsapp": "",
+      "email": "sanjeevanitrivandrum@gmail.com",
+      "website": "http://www.sanjeevanitrivandrum.com/",
+      "location": "Trivandrum",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 0,
+      "to": 1440,
+      "hours": "Every day, 24 hours",
+      "tollFree": false,
+      "heroRank": 12,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Sneha Foundation",
+      "phone": "4424640050",
+      "altPhone": "4424640060",
+      "whatsapp": "",
+      "email": "help@snehaindia.org",
+      "website": "https://snehaindia.org/new/",
+      "location": "Chennai",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 600,
+      "to": 1320,
+      "hours": "Every day, 10 am – 10 pm",
+      "tollFree": false,
       "heroRank": 2,
-      "lastVerified": "2026-09-15"
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Sumaitri",
+      "phone": "1146018404",
+      "altPhone": "9315767849",
+      "whatsapp": "",
+      "email": "feelingsuicidal@sumaitri.net",
+      "website": "https://sumaitri.net/",
+      "location": "New Delhi",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 750,
+      "to": 1020,
+      "hours": "Every day, 12:30 pm – 5 pm",
+      "tollFree": false,
+      "heroRank": 10,
+      "lastVerified": "2026-10-01"
+    },
+    {
+      "name": "Thanal Crisis Intervention and Suicide Prevention Research Centre",
+      "phone": "4952760000",
+      "altPhone": "",
+      "whatsapp": "",
+      "email": "thanal.calicut@gmail.com",
+      "website": "https://www.drpnsureshkumar.com/thanal.html",
+      "location": "Calicut",
+      "address": "",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "from": 600,
+      "to": 1080,
+      "hours": "Every day, 10 am – 6 pm",
+      "tollFree": false,
+      "heroRank": 13,
+      "lastVerified": "2026-10-01"
     }
   ]
 }
