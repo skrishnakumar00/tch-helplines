@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#5B4B7C">
 <title>Helplines</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="images/icon-192.png">
+<!-- v2 changes (v1 file keeps the originals): F12b add-to-home-screen removed (no manifest or touch icon, so no
+     install banner either); F13 last-checked footer removed; F14 location pill added. -->
 <style>
   /* ============ DESIGN TOKENS (from ankahee-design-tokens.css, unchanged) ============ */
   :root {
@@ -91,8 +91,12 @@
   .tag {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 15px; line-height: 1.3; padding: 3px 12px; border-radius: 999px;
-    background: var(--surface-soft); color: var(--text);
+    background: var(--surface-soft); color: var(--text); border: 1px solid transparent;
   }
+  /* F14 location pill: white with a plum outline, so it stands out from the grey language pills
+     and still shows up on the soft-plum hero card. */
+  .tag-loc { background: var(--surface); border-color: var(--primary); color: var(--primary-dark); font-weight: 600; }
+  .tag-loc svg { flex-shrink: 0; }
   .status { font-weight: 600; }
   .status.open { background: var(--success-soft); }
   .status.open::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
@@ -145,12 +149,6 @@
   }
   .loading-note { text-align: center; padding: 40px 16px; color: var(--text-muted); font-size: 15px; }
 
-  .footer-note { font-size: 15px; color: var(--text-muted); margin: 22px 4px 4px; }
-  .text-link {
-    background: none; border: none; color: var(--primary); font-family: inherit; font-size: 15px; font-weight: 600;
-    text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; padding: 8px 4px;
-  }
-
   /* ============ SAVE BAR ============ */
   .save-bar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
@@ -183,8 +181,6 @@
   <p class="now-line" id="nowLine"></p>
   <div id="filterWrap"></div>
   <div id="content"><div class="loading-note">Loading…</div></div>
-  <p class="footer-note" id="verifiedNote"></p>
-  <button class="text-link" id="homeScreenBtn" type="button" hidden>Add this page to your home screen</button>
 </main>
 
 <div class="save-bar" id="saveBar" hidden>
@@ -370,7 +366,7 @@ function cardHtml(x, isHero) {
   const h = x.h, st = x.st;
   const tags = ['<span class="tag status ' + (st.open ? 'open' : 'closed') + '">' + esc(st.text) + '</span>'];
   if (h.tollFree) tags.push('<span class="tag">Free call</span>');
-  if (h.location) tags.push('<span class="tag">' + esc(h.location) + '</span>');
+  if (h.location) tags.push(locationPillHtml(h.location));
   (h.languages || []).forEach(l => tags.push('<span class="tag">' + esc(l) + '</span>'));
 
   const callCls = st.open ? 'btn btn-primary btn-block' : 'btn btn-secondary btn-block';
@@ -394,6 +390,25 @@ function cardHtml(x, isHero) {
   return html + '</article>';
 }
 /* ===== end FEATURE F8 ===== */
+
+/* ====================================================================
+   FEATURE F14 — Location pill
+   Status: Modified (of the F8 helpline card, v2). Delta: the location used to be a plain grey
+     pill identical to the language pills; it is now a white pill with a plum outline, plum text
+     and a small pin icon. Reuse the existing .tag class and add .tag-loc; language pills and
+     the "Free call" pill are unchanged.
+   Validation: only drawn when the helpline has a location; text is HTML-escaped.
+   Calculation: none.
+   Dependencies: F8 (cardHtml calls locationPillHtml); helplines.json location.
+   To remove: delete this block, the .tag-loc CSS, and restore the plain <span class="tag"> line in cardHtml.
+   ==================================================================== */
+function locationPillHtml(location) {
+  return '<span class="tag tag-loc">' +
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+    '<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>' +
+    esc(location) + '</span>';
+}
+/* ===== end FEATURE F14 ===== */
 
 /* ====================================================================
    FEATURE F9 — "Not open right now" list
@@ -494,22 +509,11 @@ function applySettings() {
 }
 /* ===== end FEATURE F5 ===== */
 
-/* ====================================================================
-   FEATURE F13 — Last-checked note
-   Status: New.
-   Validation: shown only when the data has a verifiedOn date.
-   Calculation: C10 oldest Last Verified among published rows (computed at export).
-     UNVERIFIED — NEEDS CONFIRMATION
-   Dependencies: helplines.json verifiedOn (F2).
-   ==================================================================== */
-function renderVerifiedNote() {
-  const d = fmtDateStr(DATA && DATA.verifiedOn);
-  document.getElementById('verifiedNote').textContent = d ? 'Last checked ' + d + ' · Timings may differ on public holidays.' : '';
-}
-/* ===== end FEATURE F13 ===== */
+/* FEATURE F13 (last-checked footer) was removed in v2. helplines.json still carries verifiedOn; the page ignores it.
+   Each card's "More details" still shows its own "Details checked" date. */
 
 /* ====================================================================
-   Sheet (bottom panel) helpers — used by F11 and F12
+   Sheet (bottom panel) helpers — used by F11
    ==================================================================== */
 function showSheet(html) {
   document.getElementById('sheetContent').innerHTML = html;
@@ -540,35 +544,17 @@ document.getElementById('saveContactsBtn').addEventListener('click', () => {
 /* ===== end FEATURE F11 ===== */
 
 /* ====================================================================
-   FEATURE F12 — Offline copy + add to home screen
-   Status: New.
+   FEATURE F12 — Offline copy
+   Status: Modified (v2). Delta: the "add to home screen" link, its instructions sheet, the install-prompt
+     code, the web manifest and the touch icon were removed (that part is retired, not just hidden).
+     The offline copy is unchanged. v1 keeps the home-screen code if it is ever wanted back.
    Validation: service worker registered only over https or localhost.
    Calculation: none.
-   Dependencies: sw.js, manifest.webmanifest, images/icon-192.png and icon-512.png in the repo.
+   Dependencies: sw.js in the repo (sw_v2.js).
    ==================================================================== */
-let installPrompt = null;
-
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
-
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; });
-
-(function initHomeScreenButton() {
-  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-  const btn = document.getElementById('homeScreenBtn');
-  if (standalone) return;
-  btn.hidden = false;
-  btn.addEventListener('click', () => {
-    if (installPrompt) { installPrompt.prompt(); installPrompt = null; return; }
-    showSheet(
-      '<h3>Keep this page on your phone</h3>' +
-      '<p><strong>iPhone (Safari):</strong> tap the Share button, then “Add to Home Screen”.</p>' +
-      '<p><strong>Android (Chrome):</strong> tap the ⋮ menu, then “Add to Home screen” or “Install app”.</p>' +
-      '<p>Once added, it opens like an app, and the last list still opens without internet.</p>' +
-      '<button class="btn btn-primary btn-block" id="sheetClose" type="button">Okay</button>');
-  });
-})();
 /* ===== end FEATURE F12 ===== */
 
 /* ====================================================================
@@ -590,7 +576,6 @@ async function loadData() {
   applySettings();
   renderFilters();
   render();
-  renderVerifiedNote();
   document.getElementById('saveBar').hidden = false;
 }
 
