@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-01 12:20",
+  "generatedAt": "2026-10-01 12:59",
   "verifiedOn": "2026-10-01",
   "settings": {
     "title": "Helplines Directory",
     "subtitle": "Someone to talk to, right now",
-    "logo": "images/logo.jpg"
+    "logo": "Images/logo.jpg"
   },
   "languages": [
     "Bengali",
