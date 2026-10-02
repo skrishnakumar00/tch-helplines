@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#5B4B7C">
 <title>Helplines</title>
-<!-- v2 changes (v1 file keeps the originals): F12b add-to-home-screen removed (no manifest or touch icon, so no
+<!-- v3 change (v2 file keeps the original): F5 header, logo now 220px wide on its own row and the header scrolls away.
+     Pair it with the tightly cropped images/logo.jpg (the old image was 84% empty margin).
+     v2 changes (v1 file keeps the originals): F12b add-to-home-screen removed (no manifest or touch icon, so no
      install banner either); F13 last-checked footer removed; F14 location pill added. -->
 <style>
   /* ============ DESIGN TOKENS (from ankahee-design-tokens.css, unchanged) ============ */
@@ -44,12 +46,14 @@
   :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
   /* ============ HEADER ============ */
+  /* v3 (F5 modified): the logo gets its own row and a readable size. The header no longer sticks to the
+     top, so the bigger logo does not eat screen space while scrolling. Content lines up with the 640px column below. */
   .topbar {
-    position: sticky; top: 0; z-index: 20;
     background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow);
-    padding: 12px 16px; display: flex; align-items: center; gap: 12px;
+    padding: 14px max(16px, calc((100% - 640px) / 2 + 16px)) 12px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
   }
-  .topbar .logo { height: 40px; width: auto; max-width: 64px; object-fit: contain; border-radius: 8px; flex-shrink: 0; }
+  .topbar .logo { width: min(220px, 62vw); max-height: 96px; object-fit: contain; object-position: left center; border-radius: 8px; flex-shrink: 0; }
   .topbar h1 { margin: 0; font-size: 18px; color: var(--primary-dark); line-height: 1.2; }
   .topbar p { margin: 2px 0 0; font-size: 15px; color: var(--text-muted); }
   .topbar p:empty { display: none; }
@@ -491,7 +495,9 @@ function render(date) {
 
 /* ====================================================================
    FEATURE F5 — Header from Config
-   Status: New.
+   Status: Modified (v3). Delta: logo shown at up to 220px wide (max 96px high) on its own row instead of
+     40px high x 64px wide beside the title; header is no longer sticky. Logic is unchanged.
+   Original status: New.
    Validation: logo is hidden if the image fails to load; title falls back to "Helplines".
    Calculation: none.
    Dependencies: helplines.json settings {title, subtitle, logo} (F2); images/logo.png in the repo.
